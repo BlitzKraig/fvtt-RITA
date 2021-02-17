@@ -70,7 +70,7 @@ class Rita {
         if (Rita.listening) {
             Rita.commonCommand();
             let foundActor = await ActorDirectory.collection.find((actorToFind) => {
-                return actorToFind.data.name.toLowerCase().split(' ').join() == actor.toLowerCase().split(' ').join()
+                return actorToFind.data.name.toLowerCase().split(' ').join('') == actor.toLowerCase().split(' ').join('')
             })
             if (foundActor) {
 
@@ -168,7 +168,9 @@ class Rita {
                 Rita.listening = true;
                 RitaTalkback.skip = true;
                 ritaAnnyang.trigger(phrase);
-                Rita.lastCommand = phrase;
+                if (phrase.toLowerCase() !== "again") {
+                    Rita.lastCommand = phrase;
+                }
             },
             'Again': () => {
                 if (Rita.listening) {
@@ -368,7 +370,7 @@ class Rita {
                         RitaTalkback.say(`Please select a token with ${spell}`);
                         return;
                     }
-                    let spellItem = await canvas.tokens.controlled[0].actor.items.find((item) => item.name.toLowerCase() == spell.toLowerCase())
+                    let spellItem = await canvas.tokens.controlled[0].actor.items.find((item) => item.name.toLowerCase().replace(/:/g, '') == spell.toLowerCase())
 
                     if (spellItem) {
                         RitaTalkback.say(`<p>${spellItem.data.data.description.value}</p>`, {
