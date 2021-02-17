@@ -9,7 +9,13 @@
 
 RITA is a voice-activated assistant for FVTT.
 
+Full documentation coming soon, but in the meantime:
+
 Try saying "Rita, list commands"
+
+Parentheses mean the word is optional. Asterisks mean any words after this point will be sent to the callback function.
+
+Say "Rita, Stop" if you need the assistant to stop talking
 
 Check module settings for PTT, TTS options and other goodies.
 

@@ -65,7 +65,7 @@ class Rita {
         }
         return false;
     }
-    
+
     static async spawn(actor) {
         if (Rita.listening) {
             Rita.commonCommand();
@@ -79,21 +79,25 @@ class Rita {
                 let gridPosition = canvas.grid.grid.getGridPositionFromPixels(mousePosition.x, mousePosition.y);
                 let finalPos = canvas.grid.grid.getPixelsFromGridPosition(gridPosition[0], gridPosition[1]);
 
-                const token = await Token.fromActor(foundActor, {x: finalPos[0], y: finalPos[1], hidden: false});
+                const token = await Token.fromActor(foundActor, {
+                    x: finalPos[0],
+                    y: finalPos[1],
+                    hidden: false
+                });
                 const td = token.data;
 
-    // Adjust token position
-    const hg = canvas.dimensions.size / 2;
-    td.x -= td.width * hg;
-    td.y -= td.height * hg;
-    if ( !event.shiftKey ) mergeObject(td, canvas.grid.getSnappedPosition(td.x, td.y));
-    if ( !canvas.grid.hitArea.contains(td.x, td.y) ) return false;
+                // Adjust token position
+                const hg = canvas.dimensions.size / 2;
+                td.x -= td.width * hg;
+                td.y -= td.height * hg;
+                if (!event.shiftKey) mergeObject(td, canvas.grid.getSnappedPosition(td.x, td.y));
+                if (!canvas.grid.hitArea.contains(td.x, td.y)) return false;
 
-    // Submit the Token creation request and activate the Tokens layer (if not already active)
-    // this.activate();
-    Token.create(td);
-    
-    RitaTalkback.say(`<h2>Spawning ${foundActor.name}</h2><img style="width: 20%;" src=${td.img}/>`);
+                // Submit the Token creation request and activate the Tokens layer (if not already active)
+                // this.activate();
+                Token.create(td);
+
+                RitaTalkback.say(`<h2>Spawning ${foundActor.name}</h2><img style="width: 20%;" src=${td.img}/>`);
                 // const mouse = canvas.app.renderer.plugins.interaction.mouse;
                 // let mousePosition = mouse.getLocalPosition(canvas.app.stage);
                 // let gridPosition = canvas.grid.grid.getGridPositionFromPixels(mousePosition.x, mousePosition.y);
@@ -156,7 +160,7 @@ class Rita {
             [`(Hello) (OK) (Okay) (Hi) ${Rita.assistantName} *phrase`]: (phrase) => {
                 Rita.listening = true;
                 ritaAnnyang.trigger(phrase)
-                if(phrase.toLowerCase() !== "again"){
+                if (phrase.toLowerCase() !== "again") {
                     Rita.lastCommand = phrase;
                 }
             },
@@ -168,7 +172,7 @@ class Rita {
             },
             'Again': () => {
                 if (Rita.listening) {
-                    if(Rita.lastCommand){
+                    if (Rita.lastCommand) {
                         Rita.commonCommand();
                         // RitaTalkback.skip = true;
                         console.log(Rita.lastCommand);
@@ -195,7 +199,9 @@ class Rita {
 
                     if (spellItem) {
                         RitaTalkback.say(`${spellItem.labels.range || 'Range unknown'}`, {
-                            query: RitaFormatter.getActorItem(spellItem, {headerSuffix : 'Range'})
+                            query: RitaFormatter.getActorItem(spellItem, {
+                                headerSuffix: 'Range'
+                            })
                         });
                         // alert(`${Rita.assistantName}: Casting ${spell}`);
                     } else {
@@ -216,7 +222,9 @@ class Rita {
 
                     if (spellItem) {
                         RitaTalkback.say(`${spellItem.labels.duration || 'Duration unknown'}`, {
-                            query: RitaFormatter.getActorItem(spellItem, {headerSuffix : 'Duration'})
+                            query: RitaFormatter.getActorItem(spellItem, {
+                                headerSuffix: 'Duration'
+                            })
                         });
                     } else {
                         RitaTalkback.say(`${canvas.tokens.controlled[0].name} doesn't know ${spell}`);
@@ -236,7 +244,9 @@ class Rita {
 
                     if (spellItem) {
                         RitaTalkback.say(`${spellItem.labels.level || 'Level unknown'}`, {
-                            query: RitaFormatter.getActorItem(spellItem, {headerSuffix : 'Level'})
+                            query: RitaFormatter.getActorItem(spellItem, {
+                                headerSuffix: 'Level'
+                            })
                         });
                     } else {
                         RitaTalkback.say(`${canvas.tokens.controlled[0].name} doesn't know ${spell}`);
@@ -256,7 +266,9 @@ class Rita {
 
                     if (spellItem) {
                         RitaTalkback.say(`${spellItem.labels.activation || 'Activation unknown'}`, {
-                            query: RitaFormatter.getActorItem(spellItem, {headerSuffix : 'Activation'})
+                            query: RitaFormatter.getActorItem(spellItem, {
+                                headerSuffix: 'Activation'
+                            })
                         });
                     } else {
                         RitaTalkback.say(`${canvas.tokens.controlled[0].name} doesn't know ${spell}`);
@@ -276,7 +288,9 @@ class Rita {
 
                     if (spellItem) {
                         RitaTalkback.say(`${spellItem.labels.damage + ' ' + spellItem.labels.damageTypes || 'Damage unknown'}`, {
-                            query: RitaFormatter.getActorItem(spellItem, {headerSuffix : 'Damage'})
+                            query: RitaFormatter.getActorItem(spellItem, {
+                                headerSuffix: 'Damage'
+                            })
                         });
                     } else {
                         RitaTalkback.say(`${canvas.tokens.controlled[0].name} doesn't know ${spell}`);
@@ -336,7 +350,9 @@ class Rita {
                             summary += `<p>Bonus to hit: ${spellItem.labels.toHit}.</p>`
                         }
                         RitaTalkback.say(summary, {
-                            query: RitaFormatter.getActorItem(spellItem, {headerPrefix : 'Summary of'})
+                            query: RitaFormatter.getActorItem(spellItem, {
+                                headerPrefix: 'Summary of'
+                            })
                         });
                     } else {
                         RitaTalkback.say(`${canvas.tokens.controlled[0].name} doesn't know ${spell}`);
@@ -357,14 +373,6 @@ class Rita {
                     if (spellItem) {
                         RitaTalkback.say(`<p>${spellItem.data.data.description.value}</p>`, {
                             query: RitaFormatter.getActorItem(spellItem)
-                            
-                            // `<button href="javascript:game.actors.get("${spellItem.actor.id}").getOwnedItem("${spellItem.id}").sheet.render(true)"><i class="fas fa-suitcase"></i>${spellItem.name}</button>`
-
-
-                            // `<a class="entity-link" href="javascript:${spellItem.sheet.render(true)}"><i class="fas fa-suitcase"></i>${spellItem.name}</a>`
-                            // canvas.tokens.controlled[0].actor.getOwnedItem(test._id).sheet.render(true)
-
-                            // `<a class="entity-link" draggable="true" data-entity="Item" data-id="3J0uczR1weUPqVSm"><i class="fas fa-suitcase"></i> Shield</a>`
                         });
                     } else {
                         RitaTalkback.say(`${canvas.tokens.controlled[0].name} doesn't know ${spell}`);
@@ -375,13 +383,16 @@ class Rita {
             'Play *playlist': (playlist) => {
                 if (Rita.listening) {
                     Rita.commonCommand();
-                    RitaTalkback.say(`Playing ${playlist}`);
-                    alert(`${Rita.assistantName}: Playing ${playlist}`);
+                    RitaTalkback.say(`Playlists coming soon`);
                 }
                 Rita.listening = false;
             },
             'Stop (the) music': () => {
-
+                if (Rita.listening) {
+                    Rita.commonCommand();
+                    RitaTalkback.say(`Playlists coming soon`);
+                }
+                Rita.listening = false;
             },
             [`${Rita.macroExecuteKeyword} *macro`]: async (macro) => {
                 if (Rita.listening) {
@@ -393,9 +404,27 @@ class Rita {
                 }
                 Rita.listening = false;
             },
-            'Target *token': () => {},
-            'Kill *token': () => {},
-            'How many *item (do I have)': () => {},
+            'Target *token': () => {
+                if (Rita.listening) {
+                    Rita.commonCommand();
+                    RitaTalkback.say(`Coming soon`);
+                }
+                Rita.listening = false;
+            },
+            'Kill *token': () => {
+                if (Rita.listening) {
+                    Rita.commonCommand();
+                    RitaTalkback.say(`Coming soon`);
+                }
+                Rita.listening = false;
+            },
+            'How many *item (do I have)': () => {
+                if (Rita.listening) {
+                    Rita.commonCommand();
+                    RitaTalkback.say(`Coming soon`);
+                }
+                Rita.listening = false;
+            },
             'Spawn (a) (an) *actor': Rita.spawn,
             'Spon (a) (an) *actor': Rita.spawn,
             'I love you': () => {
@@ -695,11 +724,11 @@ class Rita {
             });
 
 
-            $(document).on('click', '.rita-actoritem', function(){
+            $(document).on('click', '.rita-actoritem', function () {
                 let ritaData = $(this).data("rita").split(':');
                 game.actors.get(ritaData[0]).getOwnedItem(ritaData[1]).sheet.render(true)
                 return false;
-           });
+            });
 
             ui.notifications.notify(`RITA: ${Rita.assistantName} is listening`);
         }
