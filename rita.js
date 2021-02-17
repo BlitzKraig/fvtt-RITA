@@ -432,7 +432,7 @@ class Rita {
                 }
                 Rita.listening = false;
             },
-            'Show (me) (all) commands': () => {
+            'Show (me) (all) (your) commands': () => {
                 if (Rita.listening) {
                     Rita.commonCommand();
                     let commandScopes = [...new Set(ritaAnnyang.getCommandsList().map(command => command.scope))];
@@ -459,7 +459,7 @@ class Rita {
                 }
                 Rita.listening = false;
             },
-            'List (all) commands': () => {
+            'List (all) (your) commands': () => {
                 if (Rita.listening) {
                     Rita.commonCommand();
                     let commandScopes = [...new Set(ritaAnnyang.getCommandsList().map(command => command.scope))];
