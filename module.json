@@ -1,0 +1,22 @@
+{
+  "name": "RITA",
+  "title": "R.I.T.A by Blitz",
+  "description": "Your very own voice activated assistant. Run macros, play playlists, cast spells!",
+  "version": "0.0.1",
+  "author": "Blitzkraig",
+  "scripts": ["./rita.js", "dependencies/rita-annyang.js", "modules/talkback.js", "helpers/ritaformatter.js"],
+  "styles": [],
+  "packs": [],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "minimumCoreVersion": "0.7.9",
+  "compatibleCoreVersion": "0.7.9",
+  "url": "https://github.com/BlitzKraig/fvtt-RITA",
+  "manifest": "https://raw.githubusercontent.com/BlitzKraig/fvtt-RITA/master/module.json",
+  "download": "https://github.com/BlitzKraig/fvtt-RITA/releases/download/latest/rita-release.zip"
+}
