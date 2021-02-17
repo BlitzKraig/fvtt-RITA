@@ -1,5 +1,5 @@
 /**
- * R.I.T.A by Blitz
+ * RITA by Blitz
  * Your personal assistant
  */
 
@@ -701,7 +701,7 @@ class Rita {
                 return false;
            });
 
-            ui.notifications.notify(`R.I.T.A: ${Rita.assistantName} is listening`);
+            ui.notifications.notify(`RITA: ${Rita.assistantName} is listening`);
         }
 
 

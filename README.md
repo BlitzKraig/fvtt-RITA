@@ -1,4 +1,4 @@
-# R-I-T-A for FVTT
+# RITA for FVTT
 
 ![RITA Release](https://github.com/BlitzKraig/fvtt-RITA/workflows/RITA%20Release/badge.svg)
 ![Latest Release Download Count](https://img.shields.io/github/downloads/BlitzKraig/fvtt-RITA/latest/rita-release.zip)
