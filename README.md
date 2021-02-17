@@ -17,6 +17,10 @@ Parentheses mean the word is optional. Asterisks mean any words after this point
 
 Say "Rita, Stop" if you need the assistant to stop talking
 
+Say "Rita, execute macroName" to execute a macro
+
+Alternatively, if you ask Rita to do something she doesn't understand, she'll check to see if there's a matching macro (can be disabled in options)
+
 Check module settings for PTT, TTS options and other goodies.
 
 To add RITA support to your own module, add RITA as a dependency, then use:
