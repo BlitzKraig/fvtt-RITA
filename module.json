@@ -18,7 +18,7 @@
   "compatibleCoreVersion": "0.7.9",
   "url": "https://github.com/BlitzKraig/fvtt-RITA",
   "manifest": "https://raw.githubusercontent.com/BlitzKraig/fvtt-RITA/i18n-experiments/module.json",
-  "download": "https://github.com/BlitzKraig/fvtt-RITA/releases/download/latest/rita-release.zip",
+  "download": "https://github.com/BlitzKraig/fvtt-RITA/archive/i18n-experiments.zip",
   "manifestPlusVersion": "1.0.0",
   "media": [
     {
