@@ -17,13 +17,13 @@
   "minimumCoreVersion": "0.7.9",
   "compatibleCoreVersion": "0.7.9",
   "url": "https://github.com/BlitzKraig/fvtt-RITA",
-  "manifest": "https://raw.githubusercontent.com/BlitzKraig/fvtt-RITA/master/module.json",
+  "manifest": "https://raw.githubusercontent.com/BlitzKraig/fvtt-RITA/i18n-experiments/module.json",
   "download": "https://github.com/BlitzKraig/fvtt-RITA/releases/download/latest/rita-release.zip",
   "manifestPlusVersion": "1.0.0",
   "media": [
     {
       "type": "cover",
-      "url": "https://raw.githubusercontent.com/BlitzKraig/fvtt-RITA/master/docs/cover.png"
+      "url": "https://raw.githubusercontent.com/BlitzKraig/fvtt-RITA/i18n-experiments/docs/cover.png"
     }
   ],
   "allowBugReporter": true,

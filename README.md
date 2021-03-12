@@ -198,7 +198,7 @@ Please try to be aware of conflicting with other commands, there is no real chec
 
 ## Manifest
 
-`https://raw.githubusercontent.com/BlitzKraig/fvtt-RITA/master/module.json`
+`https://raw.githubusercontent.com/BlitzKraig/fvtt-RITA/i18n-experiments/module.json`
 
 ## In the works
 
