@@ -160,6 +160,8 @@ class Rita {
             Rita.assistantName = "Rita";
         }
 
+        ritaAnnyang.setLanguage(game.i18n.lang)
+
         ritaAnnyang.removeCommands();
 
         await Rita.addCommandsWithTranslations('RITA Base', RitaCommands, "RITA.commands");
