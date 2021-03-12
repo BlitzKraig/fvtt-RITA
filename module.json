@@ -2,9 +2,9 @@
   "name": "RITA",
   "title": "RITA by Blitz",
   "description": "Your very own voice activated assistant. Run macros, play playlists, cast spells!",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "Blitzkraig",
-  "scripts": ["./rita.js", "dependencies/rita-annyang.js", "modules/talkback.js", "helpers/ritaformatter.js"],
+  "scripts": ["./rita.js", "dependencies/rita-annyang.js", "modules/talkback.js", "modules/ritacommands.js", "helpers/ritaformatter.js"],
   "styles": [],
   "packs": [],
   "languages": [

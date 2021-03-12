@@ -1,4 +1,66 @@
 {
     "RITA": {
+        
+        "comVersion": 1,
+        "comComments": "When commands are updated/added, comVersion should be incremented",
+        "commands": {
+            "listen": [
+                "{assistantName}",
+                "Hello {assistantName}",
+                "OK {assistantName}", 
+                "Okay {assistantName}", 
+                "Hi {assistantName}"
+            ],
+            "runCommand": [
+                "{assistantName} *phrase",
+                "Hello {assistantName} *phrase",
+                "OK {assistantName} *phrase", 
+                "Okay {assistantName} *phrase", 
+                "Hi {assistantName} *phrase"
+            ],
+            "quietly": "Quietly *phrase",
+            "again": "Again",
+            "useSpellItem": [
+                {"Use *spell":{"verb":"Using"}},
+                {"Cast *spell":{"verb":"Casting"}},
+                {"Shoot *spell":{"verb":"Shooting"}},
+                {"Fire *spell":{"verb":"Firing"}}
+            ],
+            "getRangeSpellItem":"(What's the) range (of) (on) (my) *spell",
+            "getDurationSpellItem":"(What's the) duration (of) (on) (my) *spell",
+            "getLevelSpellItem":"(What's the) level (of) (on) (my) *spell",
+            "getActivationSpellItem": "(What's the) activation (of) (on) (my) *spell",
+            "getDamageSpellItem": "(What's the) damage (of) (on) (my) *spell",
+            "getSpellItemCount": "How many *spell (do I have)",
+            "summariseSpellItem": [
+                "Summarise *spell",
+                "Summarize *spell"
+            ],
+            "describeSpellItem": "Describe *spell",
+            "playPlaylist": "Play *playlist",
+            "stopAllPlaylists": "Stop (the) music",
+            "executeMacro": "{macroExecuteKeyword} *macro",
+            "targetToken": "Target *token",
+            "killToken": "Kill *token",
+            "spawnToken": [
+                "Spawn (a) (an) *actor",
+                "Spon (a) (an) *actor"
+            ],
+            "listAllCommands": [
+                "Show (me) (all) (your) commands",
+                "List (all) (your) commands"
+            ],
+            "silenceRita": [
+                "Stop",
+                "Quiet",
+                "Shush"
+            ],
+            "sayLoveYou": "I love you",
+            "sayHello": ["Hello", "Hi", "Hey"],
+            "sayThankYou": ["Thanks", "Thank you"],
+            "sayPodBayDoors": "Open the pod bay doors"
+
+
+        }
     }
 }
