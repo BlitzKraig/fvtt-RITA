@@ -1,0 +1,66 @@
+{
+    "RITA": {
+        
+        "comVersion": 1,
+        "comComments": "コマンドの追加や更新があった場合はcomVersionを増やしてください",
+        "commands": {
+            "listen": [
+                "{assistantName}",
+                "{assistantName}さん",
+                "{assistantName}ちゃん", 
+                "{assistantName}くん", 
+                "{assistantName}たん"
+            ],
+            "runCommand": [
+                "{assistantName} *phrase",
+                "{assistantName}さん *phrase",
+                "{assistantName}ちゃん *phrase", 
+                "{assistantName}くん *phrase", 
+                "{assistantName}たん *phrase"
+            ],
+            "quietly": "サイレントに *phrase",
+            "again": "繰り返して(ください)(くれ)",
+            "useSpellItem": [
+                {"Use *spell":{"verb":"Using"}},
+                {"Cast *spell":{"verb":"Casting"}},
+                {"Shoot *spell":{"verb":"Shooting"}},
+                {"Fire *spell":{"verb":"Firing"}}
+            ],
+            "getRangeSpellItem":"*spell (の)射程(は)(なん)(なに)(ですか)(を)(教えて)(ください)",
+            "getDurationSpellItem":"*spell (の)持続(時間)(は)(なん)(なに)(ですか)(を)(教えて)(ください)",
+            "getLevelSpellItem":"*spell (の)レベル(は)(なん)(なに)(ですか)(を)(教えて)(ください)",
+            "getActivationSpellItem": "*spell (の)発動(時間)(は)(なん)(なに)(ですか)(を)(教えて)(ください)",
+            "getDamageSpellItem": "*spell (の)ダメージ(は)(なん)(なに)(ですか)(を)(教えて)(ください)",
+            "getSpellItemCount": "*spell(は)いくつ(持って)(いますか)(残って)(いますか)",
+            "summariseSpellItem": [
+                "*spell (の)概要(を)(教えて)(ください)",
+                "*spell (を)ざっくり"
+            ],
+            "describeSpellItem": "*spell(の)概要(を)(教えて)(ください)",
+            "playPlaylist": "*playlist (を)プレイ(して)(ください)",
+            "stopAllPlaylists": "曲(を)停止",
+            "executeMacro": "{macroExecuteKeyword} *macro",
+            "targetToken": "*token (を)ターゲット(して)(ください)",
+            "killToken": "*token (を)ころ(して)(ください)",
+            "spawnToken": [
+                "*actor (を)場(に)(出して)(ください)",
+                "*actor (を)ここ(に)(出して)(ください)"
+            ],
+            "listAllCommands": [
+                "コマンド(を)全部(みせて)(ください)",
+                "コマンドリスト"
+            ],
+            "silenceRita": [
+                "とまって",
+                "静かに",
+                "黙って"
+            ],
+            "sayLoveYou": "大好き",
+            "sayHello": ["こんにちは", "やっほ", "やあ"],
+            "sayThankYou": ["ありがとう", "さんきゅー"],
+            "sayPodBayDoors": "扉を開けて"
+
+
+        }
+    }
+}
