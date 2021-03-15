@@ -332,7 +332,7 @@ class Rita {
                 console.log(userSaid); // sample output: 'hello'
                 console.log(commandText); // sample output: 'hello (there)'
                 console.log(phrases); // sample output: ['hello', 'halo', 'yellow', 'polo', 'hello kitty']
-                if (commandText == `${Rita.assistantName} *phrase`) {
+                if(commandText.toLowerCase().indexOf(Rita.assistantName.toLowerCase()) != 0){
                     if (Rita.listeningTimeout) {
                         clearTimeout(Rita.listeningTimeout);
                         Rita.listeningTimeout = undefined;
