@@ -1,54 +1,70 @@
 {
     "RITA": {
-        
-        "comVersion": 1,
-        "comComments": "When commands are updated/added, comVersion should be incremented",
+        "comVersion": 2,
+        "comComments": "When commands are updated/added, comVersion will be incremented in en.json, allowing localizers to know if their file is outdated. You do not need to translate this string.",
+        "comComments2": "See i18n.md for RITA localization instructions. You do not need to translate this string.",
+        "comComments3": "See commandchanges.md for important changes between versions. You do not need to translate this string",
         "commands": {
             "listen": [
                 "{assistantName}",
                 "Hello {assistantName}",
-                "OK {assistantName}", 
-                "Okay {assistantName}", 
+                "OK {assistantName}",
+                "Okay {assistantName}",
                 "Hi {assistantName}"
             ],
             "runCommand": [
                 "{assistantName} *phrase",
                 "Hello {assistantName} *phrase",
-                "OK {assistantName} *phrase", 
-                "Okay {assistantName} *phrase", 
+                "OK {assistantName} *phrase",
+                "Okay {assistantName} *phrase",
                 "Hi {assistantName} *phrase"
             ],
             "quietly": "Quietly *phrase",
             "again": "Again",
-            "useSpellItem": [
-                {"Use *spell":{"verb":"Using"}},
-                {"Cast *spell":{"verb":"Casting"}},
-                {"Shoot *spell":{"verb":"Shooting"}},
-                {"Fire *spell":{"verb":"Firing"}}
+            "useSpellItem": [{
+                    "Use *spell": {
+                        "verb": "Using"
+                    }
+                },
+                {
+                    "Cast *spell": {
+                        "verb": "Casting"
+                    }
+                },
+                {
+                    "Shoot *spell": {
+                        "verb": "Shooting"
+                    }
+                },
+                {
+                    "Fire *spell": {
+                        "verb": "Firing"
+                    }
+                }
             ],
-            "getRangeSpellItem":"(What's the) range (of) (on) (my) *spell",
-            "getDurationSpellItem":"(What's the) duration (of) (on) (my) *spell",
-            "getLevelSpellItem":"(What's the) level (of) (on) (my) *spell",
-            "getActivationSpellItem": "(What's the) activation (of) (on) (my) *spell",
-            "getDamageSpellItem": "(What's the) damage (of) (on) (my) *spell",
-            "getSpellItemCount": "How many *spell (do I have)",
+            "getRangeSpellItem": "(What's the )range (of )(on )(my )*spell",
+            "getDurationSpellItem": "(What's the )duration (of )(on )(my )*spell",
+            "getLevelSpellItem": "(What's the )level (of )(on )(my )*spell",
+            "getActivationSpellItem": "(What's the )activation (of )(on )(my )*spell",
+            "getDamageSpellItem": "(What's the )damage (of )(on )(my )*spell",
+            "getSpellItemCount": "How many *spell( do I have)",
             "summariseSpellItem": [
                 "Summarise *spell",
                 "Summarize *spell"
             ],
             "describeSpellItem": "Describe *spell",
             "playPlaylist": "Play *playlist",
-            "stopAllPlaylists": "Stop (the) music",
+            "stopAllPlaylists": "Stop (the )music",
             "executeMacro": "{macroExecuteKeyword} *macro",
             "targetToken": "Target *token",
             "killToken": "Kill *token",
             "spawnToken": [
-                "Spawn (a) (an) *actor",
-                "Spon (a) (an) *actor"
+                "Spawn (a )(an )*actor",
+                "Spon (a )(an )*actor"
             ],
             "listAllCommands": [
-                "Show (me) (all) (your) commands",
-                "List (all) (your) commands"
+                "Show (me )(all )(all of your )(your )commands",
+                "List (all )(all of your )(your )commands"
             ],
             "silenceRita": [
                 "Stop",
@@ -61,6 +77,110 @@
             "sayPodBayDoors": "Open the pod bay doors"
 
 
+        },
+        "responses": {
+            "activationUnknown": "Activation unknown",
+            "actorItemHeader": {
+                "activation": "{spellItemName} Activation",
+                "damage": "{spellItemName} Damage",
+                "duration": "{spellItemName} Duration",
+                "level": "{spellItemName} Level",
+                "range": "{spellItemName} Range",
+                "summary": "Summary of {spellItemName}"
+            },
+            "actorNotFound": "Can't find actor {actor}",
+            "comingSoon": "Coming soon",
+            "damageUnknown": "Damage unknown",
+            "doActionOnSpellItem": "{verb} {spell}",
+            "durationUnknown": "Duration unknown",
+            "executingMacro": "Executing Macro",
+            "levelUnknown": "Level unknown",
+            "loveYouEasterEgg": [
+                "Cool... Cool cool cool.",
+                "I am incapable of love",
+                "I like you too",
+                "Ok... That's nice {user}",
+                "{assistantName} does not yet know the emotion: love"
+            ],
+            "macroNotFound": "Macro {macro} not found",
+            "noPreviousCommand": "No previous command",
+            "notUnderstood": "I don't understand {phrase}",
+            "podBayEasterEgg": "I'm sorry {user}, I'm afraid I can't do that.",
+            "rangeUnknown": "Range unknown",
+            "sayHello": "Hi {user}",
+            "sayThankYou": [
+                "Any time",
+                "Happy to help",
+                "No worries",
+                "You're welcome {user}"
+            ],
+            "selectToken": "Please select a token first",
+            "selectTokenWithSpell": "Please select a token with {spell}",
+            "spawningToken": "Spawning {tokenName}",
+            "summary": {
+                "activationTime": "Activation time:",
+                "components": "Components:",
+                "damage": "Damage:",
+                "duration": "Duration:",
+                "level": "Level:",
+                "materials": "Materials:",
+                "range": "Range:",
+                "recharge": "Recharge:",
+                "school": "School:",
+                "target": "Target:",
+                "toHit": "Bonus to hit:"
+            },
+            "tokenSpellItemUnknown": "{token} doesn't know {spell}",
+            "talkbackReplacement": {
+                "comment": "These strings are TTS replacements for certain characters and strings. @mod is replaced with modifier, / is replaced with or, + is replaced with plus. You do not need to translate this string.",
+                "modifier": "modifier",
+                "or": "or",
+                "plus": "plus"
+            }
+        },
+        "settings": {
+            "assistantName": {
+                "name": "Assistant Name",
+                "hint": "Changing the assistant name will change the trigger word"
+            },
+            "shouldPTT": {
+                "name": "Enable PTT",
+                "hint": "Hold down a key instead of saying your assistants name. Your browser will refresh when you update this."
+            },
+            "pttKey": {
+                "name": "PTT Key",
+                "hint": "Keycode referencing a key for push-to-talk. Your browser will refresh when you update this."
+            },
+            "shouldFindMacro": {
+                "name": "Enable automatic macro",
+                "hint": "If RITA does not understand a command, try to execute a macro by name"
+            },
+            "shouldChat": {
+                "name": "Enable chat output"
+            },
+            "shouldSpeak": {
+                "name": "Enable TTS"
+            },
+            "ttsRate": {
+                "name": "TTS Rate"
+            },
+            "ttsPitch": {
+                "name": "TTS Pitch"
+            },
+            "ttsVolume": {
+                "name": "TTS Volume"
+            },
+            "ttsVoice": {
+                "name": "TTS Voice",
+                "hint": "Select an available voice for text-to-speech"
+            },
+            "respondToChat": {
+                "name": "Enable chat commands",
+                "hint": "Allow talking to your assistant via text chat. Begin messages with the assistant name."
+            }
+        },
+        "notif": {
+            "listening": "{assistantName} is listening"
         }
     }
 }
