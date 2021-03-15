@@ -168,7 +168,29 @@ class RitaCommands {
 
     static async getSpellItemCount(spell) {
         if (Rita.listening) {
-            RitaTalkback.say(game.i18n.localize("RITA.responses.comingSoon"));
+            if (canvas.tokens.controlled.length < 1) {
+                RitaTalkback.say(game.i18n.format("RITA.responses.selectTokenWithSpell", {spell:spell}));
+                return;
+            }
+            let spellItem = await Rita.getSpellItemFromActor(canvas.tokens.controlled[0].actor, spell);
+
+            // TODO: Dirty af, and bad for localization. Look into pluralizing and de-pluralizing nicely
+            if(!spellItem){
+                // Remove any s's at the end of the words
+                spellItem = await Rita.getSpellItemFromActor(canvas.tokens.controlled[0].actor, spell.replace(/s\b/g, ''));
+            }
+            if(!spellItem){
+                // Add s to the end of the string
+                spellItem = await Rita.getSpellItemFromActor(canvas.tokens.controlled[0].actor, spell += 's');
+            }
+
+            if (spellItem) {
+                RitaTalkback.say(game.i18n.format("RITA.responses.quantity", {quantity: spellItem.data.data?.quantity || 1, spell: spellItem.name}), {
+                    query: RitaFormatter.getActorItem(spellItem, "RITA.responses.actorItemHeader.quantity")
+                })
+            } else {
+                RitaTalkback.say(game.i18n.format("RITA.responses.tokenSpellItemUnknown", {token:canvas.tokens.controlled[0].name, spell:spell}));
+            }
         }
         Rita.listening = false;
     }
@@ -321,7 +343,7 @@ class RitaCommands {
                 Token.create(td);
 
                 RitaTalkback.say(`<h2>${game.i18n.format("RITA.responses.spawningToken", {tokenName: foundActor.name})}</h2><img style="width: 20%;" src=${td.img}/>`);
-                
+
             } else {
                 RitaTalkback.say(game.i18n.format("RITA.responses.actorNotFound", {actor: actor}))
             }

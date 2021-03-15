@@ -86,7 +86,8 @@
                 "duration": "{spellItemName} Duration",
                 "level": "{spellItemName} Level",
                 "range": "{spellItemName} Range",
-                "summary": "Summary of {spellItemName}"
+                "summary": "Summary of {spellItemName}",
+                "quantity": "{spellItemName} Quantity"
             },
             "actorNotFound": "Can't find actor {actor}",
             "comingSoon": "Coming soon",
@@ -136,7 +137,8 @@
                 "modifier": "modifier",
                 "or": "or",
                 "plus": "plus"
-            }
+            },
+            "quantity": "You have {quantity} {spell}"
         },
         "settings": {
             "assistantName": {

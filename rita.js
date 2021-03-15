@@ -31,13 +31,14 @@ class Rita {
         }
         return o;
     }
-    
+
     static async executeMacro(macroName) {
         let macro = game.macros.find((macro) => {
             return Rita.fuzzString(macro.data.name) == Rita.fuzzString(macroName);
         });
         if (macro) {
             macro.execute()
+            // TODO Make macro header clickable
             RitaTalkback.say(`<p>${macro.data.name}</p>`, {
                 query: '<h2>Executing Macro</h2>'
             });
