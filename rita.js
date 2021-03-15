@@ -31,16 +31,7 @@ class Rita {
         }
         return o;
     }
-
-    static async commonCommand() {
-        //TODO: Remove this, and use a successful command event
-        // if (Rita.listeningTimeout) {
-        //     clearTimeout(Rita.listeningTimeout);
-        //     Rita.listeningTimeout = undefined;
-        // }
-
-    }
-
+    
     static async executeMacro(macroName) {
         let macro = game.macros.find((macro) => {
             return Rita.fuzzString(macro.data.name) == Rita.fuzzString(macroName);

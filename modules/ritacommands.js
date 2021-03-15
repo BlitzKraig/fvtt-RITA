@@ -34,8 +34,6 @@ class RitaCommands {
     static again() {
         if (Rita.listening) {
             if (Rita.lastCommand) {
-                Rita.commonCommand();
-                // RitaTalkback.skip = true;
                 console.log(Rita.lastCommand);
                 ritaAnnyang.trigger(Rita.lastCommand);
             } else {
@@ -49,8 +47,6 @@ class RitaCommands {
         verb = 'Casting'
     } = {}) {
         if (Rita.listening) {
-            Rita.commonCommand();
-
             if (canvas.tokens.controlled.length < 1) {
                 RitaTalkback.say(game.i18n.localize("RITA.responses.selectToken"));
                 return;
@@ -76,8 +72,6 @@ class RitaCommands {
 
     static async getRangeSpellItem(spell) {
         if (Rita.listening) {
-            Rita.commonCommand();
-
             if (canvas.tokens.controlled.length < 1) {
                 RitaTalkback.say(game.i18n.format("RITA.responses.selectTokenWithSpell", {spell:spell}));
                 return;
@@ -97,8 +91,6 @@ class RitaCommands {
 
     static async getDurationSpellItem(spell) {
         if (Rita.listening) {
-            Rita.commonCommand();
-
             if (canvas.tokens.controlled.length < 1) {
                 RitaTalkback.say(game.i18n.format("RITA.responses.selectTokenWithSpell", {spell:spell}));
                 return;
@@ -118,8 +110,6 @@ class RitaCommands {
 
     static async getLevelSpellItem(spell) {
         if (Rita.listening) {
-            Rita.commonCommand();
-
             if (canvas.tokens.controlled.length < 1) {
                 RitaTalkback.say(game.i18n.format("RITA.responses.selectTokenWithSpell", {spell:spell}));
                 return;
@@ -139,8 +129,6 @@ class RitaCommands {
 
     static async getActivationSpellItem(spell) {
         if (Rita.listening) {
-            Rita.commonCommand();
-
             if (canvas.tokens.controlled.length < 1) {
                 RitaTalkback.say(game.i18n.format("RITA.responses.selectTokenWithSpell", {spell:spell}));
                 return;
@@ -160,8 +148,6 @@ class RitaCommands {
 
     static async getDamageSpellItem(spell) {
         if (Rita.listening) {
-            Rita.commonCommand();
-
             if (canvas.tokens.controlled.length < 1) {
                 RitaTalkback.say(game.i18n.format("RITA.responses.selectTokenWithSpell", {spell:spell}));
                 return;
@@ -182,7 +168,6 @@ class RitaCommands {
 
     static async getSpellItemCount(spell) {
         if (Rita.listening) {
-            Rita.commonCommand();
             RitaTalkback.say(game.i18n.localize("RITA.responses.comingSoon"));
         }
         Rita.listening = false;
@@ -190,8 +175,6 @@ class RitaCommands {
 
     static async summariseSpellItem(spell) {
         if (Rita.listening) {
-            Rita.commonCommand();
-
             if (canvas.tokens.controlled.length < 1) {
                 RitaTalkback.say(game.i18n.format("RITA.responses.selectTokenWithSpell", {spell:spell}));
                 return;
@@ -252,8 +235,6 @@ class RitaCommands {
 
     static async describeSpellItem(spell) {
         if (Rita.listening) {
-            Rita.commonCommand();
-
             if (canvas.tokens.controlled.length < 1) {
                 RitaTalkback.say(game.i18n.format("RITA.responses.selectTokenWithSpell", {spell:spell}));
                 return;
@@ -273,7 +254,6 @@ class RitaCommands {
 
     static playPlaylist(playlist) {
         if (Rita.listening) {
-            Rita.commonCommand();
             RitaTalkback.say(game.i18n.localize("RITA.responses.comingSoon"))
         }
         Rita.listening = false;
@@ -281,7 +261,6 @@ class RitaCommands {
 
     static stopAllPlaylists() {
         if (Rita.listening) {
-            Rita.commonCommand();
             RitaTalkback.say(game.i18n.localize("RITA.responses.comingSoon"))
         }
         Rita.listening = false;
@@ -289,7 +268,6 @@ class RitaCommands {
 
     static async executeMacro(macro) {
         if (Rita.listening) {
-            Rita.commonCommand();
             if (await Rita.executeMacro(macro)) {
                 return;
             }
@@ -300,7 +278,6 @@ class RitaCommands {
 
     static targetToken(token) {
         if (Rita.listening) {
-            Rita.commonCommand();
             RitaTalkback.say(game.i18n.localize("RITA.responses.comingSoon"));
         }
         Rita.listening = false;
@@ -308,7 +285,6 @@ class RitaCommands {
 
     static killToken(token) {
         if (Rita.listening) {
-            Rita.commonCommand();
             RitaTalkback.say(game.i18n.localize("RITA.responses.comingSoon"));
         }
         Rita.listening = false;
@@ -316,7 +292,6 @@ class RitaCommands {
 
     static async spawnToken(actor) {
         if (Rita.listening) {
-            Rita.commonCommand();
             let foundActor = await ActorDirectory.collection.find((actorToFind) => {
                 return actorToFind.data.name.toLowerCase().split(' ').join('') == actor.toLowerCase().split(' ').join('')
             })
@@ -346,17 +321,7 @@ class RitaCommands {
                 Token.create(td);
 
                 RitaTalkback.say(`<h2>${game.i18n.format("RITA.responses.spawningToken", {tokenName: foundActor.name})}</h2><img style="width: 20%;" src=${td.img}/>`);
-                // const mouse = canvas.app.renderer.plugins.interaction.mouse;
-                // let mousePosition = mouse.getLocalPosition(canvas.app.stage);
-                // let gridPosition = canvas.grid.grid.getGridPositionFromPixels(mousePosition.x, mousePosition.y);
-                // let finalPos = canvas.grid.grid.getPixelsFromGridPosition(gridPosition[0], gridPosition[1]);
-
-                // let summon = await Token.fromActor(foundActor);
-
-                // summon.x = finalPos[1];
-                // summon.y = finalPos[0];
-                // await game.scenes.viewed.createEmbeddedEntity("Token", summon);
-
+                
             } else {
                 RitaTalkback.say(game.i18n.format("RITA.responses.actorNotFound", {actor: actor}))
             }
@@ -366,7 +331,6 @@ class RitaCommands {
 
     static listAllCommands() {
         if (Rita.listening) {
-            Rita.commonCommand();
             let commandScopes = [...new Set(ritaAnnyang.getCommandsList().map(command => command.scope))];
 
             let commandsList = {};
@@ -394,7 +358,6 @@ class RitaCommands {
 
     static silenceRita() {
         if (Rita.listening) {
-            Rita.commonCommand();
             RitaTalkback.stop();
         }
         Rita.listening = false;
@@ -402,7 +365,6 @@ class RitaCommands {
 
     static sayLoveYou() {
         if (Rita.listening) {
-            Rita.commonCommand();
             // TODO: Pull this functionality out and make it available to all responses (multiple possible responses)
             let response = game.i18n.translations["RITA"]["responses"]["loveYouEasterEgg"];
             RitaTalkback.say(game.i18n.format(response[Math.floor(Math.random() * response.length)], {user: game.user.name, assistantName: Rita.assistantName}));
@@ -412,7 +374,6 @@ class RitaCommands {
 
     static sayHello() {
         if (Rita.listening) {
-            Rita.commonCommand();
             RitaTalkback.say(game.i18n.format("RITA.responses.sayHello", {user: game.user.name}));
         }
         Rita.listening = false;
@@ -420,7 +381,6 @@ class RitaCommands {
 
     static sayThankYou() {
         if (Rita.listening) {
-            Rita.commonCommand();
             let response = game.i18n.translations["RITA"]["responses"]["sayThankYou"];
             RitaTalkback.say(game.i18n.format(response[Math.floor(Math.random() * response.length)], {user: game.user.name}));
         }
@@ -429,7 +389,6 @@ class RitaCommands {
 
     static sayPodBayDoors() {
         if (Rita.listening) {
-            Rita.commonCommand();
             RitaTalkback.say(game.i18n.format("RITA.responses.podBayEasterEgg", {user: game.user.name}));
         }
         Rita.listening = false;
