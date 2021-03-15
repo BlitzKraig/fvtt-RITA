@@ -1,8 +1,16 @@
 class RitaCommands {
     static listen() {
         Rita.listening = true;
+        AudioHelper.play({
+            src: 'modules/RITA/audio/active.ogg'
+        }, false)
         Rita.listeningTimeout = setTimeout(() => {
             Rita.listening = false;
+            AudioHelper.play({
+                src: 'modules/RITA/audio/inactive.ogg'
+            }, false)
+            clearTimeout(Rita.listeningTimeout);
+            Rita.listeningTimeout = undefined;
         }, 5000)
     }
 
