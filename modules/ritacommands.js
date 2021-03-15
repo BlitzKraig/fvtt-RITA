@@ -281,9 +281,12 @@ class RitaCommands {
         Rita.listening = false;
     }
 
-    static stopAllPlaylists() {
+    static async stopAllPlaylists() {
         if (Rita.listening) {
-            RitaTalkback.say(game.i18n.localize("RITA.responses.comingSoon"))
+            RitaTalkback.say(game.i18n.localize("RITA.responses.stoppingMusic"))
+            for (let playlist of game.playlists.playing) {
+                await game.playlists.get(playlist.id).stopAll();
+            }
         }
         Rita.listening = false;
     }

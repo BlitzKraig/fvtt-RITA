@@ -138,7 +138,8 @@
                 "or": "or",
                 "plus": "plus"
             },
-            "quantity": "You have {quantity} {spell}"
+            "quantity": "You have {quantity} {spell}",
+            "stoppingMusic": "Stopping all playlist tracks"
         },
         "settings": {
             "assistantName": {
