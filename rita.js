@@ -82,6 +82,31 @@ class Rita {
         return false;
     }
 
+
+    // Dodgy tests to check the chat output, not for general use
+    static _runTests(itemName = 'fire bolt', tokenName = 'drow', playlistName = 'battle'){
+        ritaAnnyang.trigger(`rita quietly use ${itemName}`);
+        ritaAnnyang.trigger(`rita quietly cast ${itemName}`);
+        ritaAnnyang.trigger(`rita quietly shoot ${itemName}`);
+        ritaAnnyang.trigger(`rita quietly fire ${itemName}`);
+        ritaAnnyang.trigger(`rita quietly range ${itemName}`);
+        ritaAnnyang.trigger(`rita quietly duration ${itemName}`);
+        ritaAnnyang.trigger(`rita quietly level ${itemName}`);
+        ritaAnnyang.trigger(`rita quietly activation ${itemName}`);
+        ritaAnnyang.trigger(`rita quietly damage ${itemName}`);
+        ritaAnnyang.trigger(`rita quietly how many ${itemName}`);
+        ritaAnnyang.trigger(`rita quietly summarize ${itemName}`);
+        ritaAnnyang.trigger(`rita quietly describe ${itemName}`);
+        ritaAnnyang.trigger(`rita quietly play ${playlistName}`);
+        ritaAnnyang.trigger(`rita quietly stop the music`);
+        ritaAnnyang.trigger(`rita quietly execute ritaTestMacro`);
+        ritaAnnyang.trigger(`rita quietly execute a macro that doesn't exist`);
+        ritaAnnyang.trigger(`rita quietly target ${tokenName}`);
+        ritaAnnyang.trigger(`rita quietly kill ${tokenName}`);
+        ritaAnnyang.trigger(`rita quietly spawn ${tokenName}`);
+        ritaAnnyang.trigger(`rita quietly list commands`);
+    }
+
     /**
      * Pass a command object to register new commands
      * Use addCommandsWithTranslations for i18n support
