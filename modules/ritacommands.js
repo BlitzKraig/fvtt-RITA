@@ -69,7 +69,6 @@ class RitaCommands {
                 // alert(`${Rita.assistantName}: Casting ${spell}`);
             } else {
                 RitaTalkback.say(game.i18n.format("RITA.responses.tokenSpellItemUnknown", {token:canvas.tokens.controlled[0].name, spell:spell}));
-                RitaTalkback.say(game.i18n.format("RITA.responses.tokenSpellItemUnknown", {token:canvas.tokens.controlled[0].name, spell:spell}));
             }
         }
         Rita.listening = false;
