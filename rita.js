@@ -41,33 +41,6 @@ class Rita {
 
     }
 
-    static async castSpell(spell, verb = 'Casting') {
-        if (Rita.listening) {
-            Rita.commonCommand();
-
-            if (canvas.tokens.controlled.length < 1) {
-                RitaTalkback.say(`Please select a token first`);
-                return;
-            }
-            let spellItem = await canvas.tokens.controlled[0].actor.items.find((item) => item.name.toLowerCase() == spell.toLowerCase())
-
-            if (spellItem) {
-                RitaTalkback.say(`${verb} ${spell}`);
-
-                if (BetterRolls) {
-                    // Need to call like this to prevent our speech recognition event from being passed through
-                    BetterRolls.rollItem(spellItem).toMessage()
-                } else {
-                    spellItem.roll();
-                }
-                // alert(`${Rita.assistantName}: Casting ${spell}`);
-            } else {
-                RitaTalkback.say(`${canvas.tokens.controlled[0].name} doesn't know ${spell}`);
-            }
-        }
-        Rita.listening = false;
-    }
-
     static async executeMacro(macroName) {
         let macro = game.macros.find((macro) => {
             return Rita.fuzzString(macro.data.name) == Rita.fuzzString(macroName);
