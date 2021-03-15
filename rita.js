@@ -170,14 +170,6 @@ class Rita {
     }
     static async onInit() {
 
-        Hooks.on('RITAReady', () => {
-            Rita.addCommands('Custom RITA', {
-                'show test alert': () => {
-                    alert('Tested')
-                }
-            })
-        });
-
         game.settings.register("RITA", "assistantName", {
             name: "Assistant Name",
             hint: "Changing the assistant name will change the trigger word",
