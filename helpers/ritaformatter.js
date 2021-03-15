@@ -1,5 +1,5 @@
 class RitaFormatter {
-    static getActorItem(spellItem, {headerPrefix = '', headerSuffix = ''} = {}) {
-        return `<h2 class="rita-actoritem" style="cursor:pointer;" data-rita="${spellItem.actor.id}:${spellItem.id}">${headerPrefix} ${spellItem.name} ${headerSuffix}</h2>`;
+    static getActorItem(spellItem, translationString = '') {
+        return `<h2 class="rita-actoritem" style="cursor:pointer;" data-rita="${spellItem.actor.id}:${spellItem.id}">${translationString!=''?game.i18n.format(translationString, {spellItemName: spellItem.name}):spellItem.name}</h2>`;
     }
 }

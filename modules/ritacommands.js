@@ -39,7 +39,7 @@ class RitaCommands {
                 console.log(Rita.lastCommand);
                 ritaAnnyang.trigger(Rita.lastCommand);
             } else {
-                RitaTalkback.say("No previous command");
+                RitaTalkback.say(game.i18n.localize("RITA.responses.noPreviousCommand"));
                 Rita.listening = false;
             }
         }
@@ -52,13 +52,13 @@ class RitaCommands {
             Rita.commonCommand();
 
             if (canvas.tokens.controlled.length < 1) {
-                RitaTalkback.say(`Please select a token first`);
+                RitaTalkback.say(game.i18n.localize("RITA.responses.selectToken"));
                 return;
             }
-            let spellItem = await canvas.tokens.controlled[0].actor.items.find((item) => item.name.toLowerCase() == spell.toLowerCase())
+            let spellItem = await Rita.getSpellItemFromActor(canvas.tokens.controlled[0].actor, spell);
 
             if (spellItem) {
-                RitaTalkback.say(`${verb} ${spell}`);
+                RitaTalkback.say(game.i18n.format("RITA.responses.doActionOnSpellItem", {verb: verb, spell: spell}));
 
                 if (BetterRolls) {
                     // Need to call like this to prevent our speech recognition event from being passed through
@@ -68,7 +68,8 @@ class RitaCommands {
                 }
                 // alert(`${Rita.assistantName}: Casting ${spell}`);
             } else {
-                RitaTalkback.say(`${canvas.tokens.controlled[0].name} doesn't know ${spell}`);
+                RitaTalkback.say(game.i18n.format("RITA.responses.tokenSpellItemUnknown", {token:canvas.tokens.controlled[0].name, spell:spell}));
+                RitaTalkback.say(game.i18n.format("RITA.responses.tokenSpellItemUnknown", {token:canvas.tokens.controlled[0].name, spell:spell}));
             }
         }
         Rita.listening = false;
@@ -79,20 +80,17 @@ class RitaCommands {
             Rita.commonCommand();
 
             if (canvas.tokens.controlled.length < 1) {
-                RitaTalkback.say(`Please select a token with ${spell}`);
+                RitaTalkback.say(game.i18n.format("RITA.responses.selectTokenWithSpell", {spell:spell}));
                 return;
             }
-            let spellItem = await canvas.tokens.controlled[0].actor.items.find((item) => item.name.toLowerCase() == spell.toLowerCase())
+            let spellItem = await Rita.getSpellItemFromActor(canvas.tokens.controlled[0].actor, spell);
 
             if (spellItem) {
-                RitaTalkback.say(`${spellItem.labels.range || 'Range unknown'}`, {
-                    query: RitaFormatter.getActorItem(spellItem, {
-                        headerSuffix: 'Range'
-                    })
+                RitaTalkback.say(`${spellItem.labels.range || game.i18n.localize("RITA.responses.rangeUnknown")}`, {
+                    query: RitaFormatter.getActorItem(spellItem, "RITA.responses.actorItemHeader.range")
                 });
-                // alert(`${Rita.assistantName}: Casting ${spell}`);
             } else {
-                RitaTalkback.say(`${canvas.tokens.controlled[0].name} doesn't know ${spell}`);
+                RitaTalkback.say(game.i18n.format("RITA.responses.tokenSpellItemUnknown", {token:canvas.tokens.controlled[0].name, spell:spell}));
             }
         }
         Rita.listening = false;
@@ -103,19 +101,17 @@ class RitaCommands {
             Rita.commonCommand();
 
             if (canvas.tokens.controlled.length < 1) {
-                RitaTalkback.say(`Please select a token with ${spell}`);
+                RitaTalkback.say(game.i18n.format("RITA.responses.selectTokenWithSpell", {spell:spell}));
                 return;
             }
-            let spellItem = await canvas.tokens.controlled[0].actor.items.find((item) => item.name.toLowerCase() == spell.toLowerCase())
+            let spellItem = await Rita.getSpellItemFromActor(canvas.tokens.controlled[0].actor, spell);
 
             if (spellItem) {
-                RitaTalkback.say(`${spellItem.labels.duration || 'Duration unknown'}`, {
-                    query: RitaFormatter.getActorItem(spellItem, {
-                        headerSuffix: 'Duration'
-                    })
+                RitaTalkback.say(`${spellItem.labels.duration || game.i18n.localize("RITA.responses.durationUnknown")}`, {
+                    query: RitaFormatter.getActorItem(spellItem, "RITA.responses.actorItemHeader.duration")
                 });
             } else {
-                RitaTalkback.say(`${canvas.tokens.controlled[0].name} doesn't know ${spell}`);
+                RitaTalkback.say(game.i18n.format("RITA.responses.tokenSpellItemUnknown", {token:canvas.tokens.controlled[0].name, spell:spell}));
             }
         }
         Rita.listening = false;
@@ -126,19 +122,17 @@ class RitaCommands {
             Rita.commonCommand();
 
             if (canvas.tokens.controlled.length < 1) {
-                RitaTalkback.say(`Please select a token with ${spell}`);
+                RitaTalkback.say(game.i18n.format("RITA.responses.selectTokenWithSpell", {spell:spell}));
                 return;
             }
-            let spellItem = await canvas.tokens.controlled[0].actor.items.find((item) => item.name.toLowerCase() == spell.toLowerCase())
+            let spellItem = await Rita.getSpellItemFromActor(canvas.tokens.controlled[0].actor, spell);
 
             if (spellItem) {
-                RitaTalkback.say(`${spellItem.labels.level || 'Level unknown'}`, {
-                    query: RitaFormatter.getActorItem(spellItem, {
-                        headerSuffix: 'Level'
-                    })
+                RitaTalkback.say(`${spellItem.labels.level || game.i18n.localize("RITA.responses.levelUnknown")}`, {
+                    query: RitaFormatter.getActorItem(spellItem, "RITA.responses.actorItemHeader.level")
                 });
             } else {
-                RitaTalkback.say(`${canvas.tokens.controlled[0].name} doesn't know ${spell}`);
+                RitaTalkback.say(game.i18n.format("RITA.responses.tokenSpellItemUnknown", {token:canvas.tokens.controlled[0].name, spell:spell}));
             }
         }
         Rita.listening = false;
@@ -149,19 +143,17 @@ class RitaCommands {
             Rita.commonCommand();
 
             if (canvas.tokens.controlled.length < 1) {
-                RitaTalkback.say(`Please select a token with ${spell}`);
+                RitaTalkback.say(game.i18n.format("RITA.responses.selectTokenWithSpell", {spell:spell}));
                 return;
             }
-            let spellItem = await canvas.tokens.controlled[0].actor.items.find((item) => item.name.toLowerCase() == spell.toLowerCase())
+            let spellItem = await Rita.getSpellItemFromActor(canvas.tokens.controlled[0].actor, spell);
 
             if (spellItem) {
-                RitaTalkback.say(`${spellItem.labels.activation || 'Activation unknown'}`, {
-                    query: RitaFormatter.getActorItem(spellItem, {
-                        headerSuffix: 'Activation'
-                    })
+                RitaTalkback.say(`${spellItem.labels.activation || game.i18n.localize("RITA.responses.activationUnknown")}`, {
+                    query: RitaFormatter.getActorItem(spellItem, "RITA.responses.actorItemHeader.activation")
                 });
             } else {
-                RitaTalkback.say(`${canvas.tokens.controlled[0].name} doesn't know ${spell}`);
+                RitaTalkback.say(game.i18n.format("RITA.responses.tokenSpellItemUnknown", {token:canvas.tokens.controlled[0].name, spell:spell}));
             }
         }
         Rita.listening = false;
@@ -172,19 +164,17 @@ class RitaCommands {
             Rita.commonCommand();
 
             if (canvas.tokens.controlled.length < 1) {
-                RitaTalkback.say(`Please select a token with ${spell}`);
+                RitaTalkback.say(game.i18n.format("RITA.responses.selectTokenWithSpell", {spell:spell}));
                 return;
             }
-            let spellItem = await canvas.tokens.controlled[0].actor.items.find((item) => item.name.toLowerCase() == spell.toLowerCase())
+            let spellItem = await Rita.getSpellItemFromActor(canvas.tokens.controlled[0].actor, spell);
 
             if (spellItem) {
-                RitaTalkback.say(`${spellItem.labels.damage + ' ' + spellItem.labels.damageTypes || 'Damage unknown'}`, {
-                    query: RitaFormatter.getActorItem(spellItem, {
-                        headerSuffix: 'Damage'
-                    })
+                RitaTalkback.say(`${spellItem.labels.damage + ' ' + spellItem.labels.damageTypes || game.i18n.localize("RITA.responses.damageUnknown")}`, {
+                    query: RitaFormatter.getActorItem(spellItem, "RITA.responses.actorItemHeader.damage")
                 });
             } else {
-                RitaTalkback.say(`${canvas.tokens.controlled[0].name} doesn't know ${spell}`);
+                RitaTalkback.say(game.i18n.format("RITA.responses.tokenSpellItemUnknown", {token:canvas.tokens.controlled[0].name, spell:spell}));
             }
         }
         Rita.listening = false;
@@ -194,7 +184,7 @@ class RitaCommands {
     static async getSpellItemCount(spell) {
         if (Rita.listening) {
             Rita.commonCommand();
-            RitaTalkback.say(`Coming soon`);
+            RitaTalkback.say(game.i18n.localize("RITA.responses.comingSoon"));
         }
         Rita.listening = false;
     }
@@ -204,22 +194,23 @@ class RitaCommands {
             Rita.commonCommand();
 
             if (canvas.tokens.controlled.length < 1) {
-                RitaTalkback.say(`Please select a token with ${spell}`);
+                RitaTalkback.say(game.i18n.format("RITA.responses.selectTokenWithSpell", {spell:spell}));
                 return;
             }
-            let spellItem = await canvas.tokens.controlled[0].actor.items.find((item) => item.name.toLowerCase() == spell.toLowerCase())
+
+            let spellItem = await Rita.getSpellItemFromActor(canvas.tokens.controlled[0].actor, spell);
 
             if (spellItem) {
                 let summary = ``;
 
                 if (spellItem.labels.activation) {
-                    summary += `<p>Activation time: ${spellItem.labels.activation}.</p>`;
+                    summary += `<p>${game.i18n.localize("RITA.responses.summary.activationTime")} ${spellItem.labels.activation}.</p>`;
                 }
                 if (spellItem.labels.components) {
-                    summary += `<p>Components: ${spellItem.labels.components}.</p>`
+                    summary += `<p>${game.i18n.localize("RITA.responses.summary.components")} ${spellItem.labels.components}.</p>`
                 }
                 if (spellItem.labels.damage) {
-                    summary += `<p>Damage: ${spellItem.labels.damage}`
+                    summary += `<p>${game.i18n.localize("RITA.responses.summary.damage")} ${spellItem.labels.damage}`
                     if (spellItem.labels.damageTypes) {
                         summary += ` ${spellItem.labels.damageTypes}`
                     }
@@ -227,36 +218,34 @@ class RitaCommands {
 
                 }
                 if (spellItem.labels.duration) {
-                    summary += `<p>Duration: ${spellItem.labels.duration}.</p>`
+                    summary += `<p>${game.i18n.localize("RITA.responses.summary.duration")} ${spellItem.labels.duration}.</p>`
                 }
                 if (spellItem.labels.level) {
-                    summary += `<p>Level: ${spellItem.labels.level}.</p>`
+                    summary += `<p>${game.i18n.localize("RITA.responses.summary.level")} ${spellItem.labels.level}.</p>`
                 }
                 if (spellItem.labels.materials) {
-                    summary += `<p>Materials: ${spellItem.labels.materials}.</p>`
+                    summary += `<p>${game.i18n.localize("RITA.responses.summary.materials")} ${spellItem.labels.materials}.</p>`
                 }
                 if (spellItem.labels.range) {
-                    summary += `<p>Range: ${spellItem.labels.range}.</p>`
+                    summary += `<p>${game.i18n.localize("RITA.responses.summary.range")} ${spellItem.labels.range}.</p>`
                 }
                 if (spellItem.labels.recharge && spellItem.labels.recharge != 'Recharge [undefined]') {
-                    summary += `<p>Recharge: ${spellItem.labels.recharge}.</p>`
+                    summary += `<p>${game.i18n.localize("RITA.responses.summary.recharge")} ${spellItem.labels.recharge}.</p>`
                 }
                 if (spellItem.labels.school) {
-                    summary += `<p>School: ${spellItem.labels.school}.</p>`
+                    summary += `<p>${game.i18n.localize("RITA.responses.summary.school")} ${spellItem.labels.school}.</p>`
                 }
                 if (spellItem.labels.target) {
-                    summary += `<p>Target: ${spellItem.labels.target}.</p>`
+                    summary += `<p>${game.i18n.localize("RITA.responses.summary.target")} ${spellItem.labels.target}.</p>`
                 }
                 if (spellItem.labels.toHit) {
-                    summary += `<p>Bonus to hit: ${spellItem.labels.toHit}.</p>`
+                    summary += `<p>${game.i18n.localize("RITA.responses.summary.toHit")} ${spellItem.labels.toHit}.</p>`
                 }
                 RitaTalkback.say(summary, {
-                    query: RitaFormatter.getActorItem(spellItem, {
-                        headerPrefix: 'Summary of'
-                    })
+                    query: RitaFormatter.getActorItem(spellItem, "RITA.responses.actorItemHeader.summary")
                 });
             } else {
-                RitaTalkback.say(`${canvas.tokens.controlled[0].name} doesn't know ${spell}`);
+                RitaTalkback.say(game.i18n.format("RITA.responses.tokenSpellItemUnknown", {token:canvas.tokens.controlled[0].name, spell:spell}));
             }
         }
         Rita.listening = false;
@@ -267,17 +256,17 @@ class RitaCommands {
             Rita.commonCommand();
 
             if (canvas.tokens.controlled.length < 1) {
-                RitaTalkback.say(`Please select a token with ${spell}`);
+                RitaTalkback.say(game.i18n.format("RITA.responses.selectTokenWithSpell", {spell:spell}));
                 return;
             }
-            let spellItem = await canvas.tokens.controlled[0].actor.items.find((item) => item.name.toLowerCase().replace(/:/g, '') == spell.toLowerCase())
+            let spellItem = await Rita.getSpellItemFromActor(canvas.tokens.controlled[0].actor, spell);
 
             if (spellItem) {
                 RitaTalkback.say(`<p>${spellItem.data.data.description.value}</p>`, {
                     query: RitaFormatter.getActorItem(spellItem)
                 });
             } else {
-                RitaTalkback.say(`${canvas.tokens.controlled[0].name} doesn't know ${spell}`);
+                RitaTalkback.say(game.i18n.format("RITA.responses.tokenSpellItemUnknown", {token:canvas.tokens.controlled[0].name, spell:spell}));
             }
         }
         Rita.listening = false;
@@ -286,7 +275,7 @@ class RitaCommands {
     static playPlaylist(playlist) {
         if (Rita.listening) {
             Rita.commonCommand();
-            RitaTalkback.say(`Playlists coming soon`);
+            RitaTalkback.say(game.i18n.localize("RITA.responses.comingSoon"))
         }
         Rita.listening = false;
     }
@@ -294,7 +283,7 @@ class RitaCommands {
     static stopAllPlaylists() {
         if (Rita.listening) {
             Rita.commonCommand();
-            RitaTalkback.say(`Playlists coming soon`);
+            RitaTalkback.say(game.i18n.localize("RITA.responses.comingSoon"))
         }
         Rita.listening = false;
     }
@@ -305,7 +294,7 @@ class RitaCommands {
             if (await Rita.executeMacro(macro)) {
                 return;
             }
-            RitaTalkback.say(`Macro ${macro} not found`);
+            RitaTalkback.say(game.i18n.format("RITA.responses.macroNotFound", {macro: macro}));
         }
         Rita.listening = false;
     }
@@ -313,7 +302,7 @@ class RitaCommands {
     static targetToken(token) {
         if (Rita.listening) {
             Rita.commonCommand();
-            RitaTalkback.say(`Coming soon`);
+            RitaTalkback.say(game.i18n.localize("RITA.responses.comingSoon"));
         }
         Rita.listening = false;
     }
@@ -321,7 +310,7 @@ class RitaCommands {
     static killToken(token) {
         if (Rita.listening) {
             Rita.commonCommand();
-            RitaTalkback.say(`Coming soon`);
+            RitaTalkback.say(game.i18n.localize("RITA.responses.comingSoon"));
         }
         Rita.listening = false;
     }
@@ -357,7 +346,7 @@ class RitaCommands {
                 // this.activate();
                 Token.create(td);
 
-                RitaTalkback.say(`<h2>Spawning ${foundActor.name}</h2><img style="width: 20%;" src=${td.img}/>`);
+                RitaTalkback.say(`<h2>${game.i18n.format("RITA.responses.spawningToken", {tokenName: foundActor.name})}</h2><img style="width: 20%;" src=${td.img}/>`);
                 // const mouse = canvas.app.renderer.plugins.interaction.mouse;
                 // let mousePosition = mouse.getLocalPosition(canvas.app.stage);
                 // let gridPosition = canvas.grid.grid.getGridPositionFromPixels(mousePosition.x, mousePosition.y);
@@ -370,7 +359,7 @@ class RitaCommands {
                 // await game.scenes.viewed.createEmbeddedEntity("Token", summon);
 
             } else {
-                RitaTalkback.say(`Can't find actor ${actor}`)
+                RitaTalkback.say(game.i18n.format("RITA.responses.actorNotFound", {actor: actor}))
             }
         }
         Rita.listening = false;
@@ -415,8 +404,9 @@ class RitaCommands {
     static sayLoveYou() {
         if (Rita.listening) {
             Rita.commonCommand();
-            let response = [`Ok... That's nice ${game.user.name}`, 'Cool... Cool cool cool.', 'I like you too', 'I am incapable of love', `${Rita.assistantName} does not yet know the emotion: love`]
-            RitaTalkback.say(response[Math.floor(Math.random() * response.length)]);
+            // TODO: Pull this functionality out and make it available to all responses (multiple possible responses)
+            let response = game.i18n.translations["RITA"]["responses"]["loveYouEasterEgg"];
+            RitaTalkback.say(game.i18n.format(response[Math.floor(Math.random() * response.length)], {user: game.user.name, assistantName: Rita.assistantName}));
         }
         Rita.listening = false;
     }
@@ -424,7 +414,7 @@ class RitaCommands {
     static sayHello() {
         if (Rita.listening) {
             Rita.commonCommand();
-            RitaTalkback.say(`Hi ${game.user.name}`);
+            RitaTalkback.say(game.i18n.format("RITA.responses.sayHello", {user: game.user.name}));
         }
         Rita.listening = false;
     }
@@ -432,8 +422,8 @@ class RitaCommands {
     static sayThankYou() {
         if (Rita.listening) {
             Rita.commonCommand();
-            let response = [`You're welcome ${game.user.name}`, 'Any time!', 'No worries', 'Happy to help']
-            RitaTalkback.say(response[Math.floor(Math.random() * response.length)]);
+            let response = game.i18n.translations["RITA"]["responses"]["sayThankYou"];
+            RitaTalkback.say(game.i18n.format(response[Math.floor(Math.random() * response.length)], {user: game.user.name}));
         }
         Rita.listening = false;
     }
@@ -441,7 +431,7 @@ class RitaCommands {
     static sayPodBayDoors() {
         if (Rita.listening) {
             Rita.commonCommand();
-            RitaTalkback.say(`I'm sorry ${game.user.name}, I'm afraid I can't do that.`);
+            RitaTalkback.say(game.i18n.format("RITA.responses.podBayEasterEgg", {user: game.user.name}));
         }
         Rita.listening = false;
     }
