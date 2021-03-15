@@ -171,8 +171,8 @@ class Rita {
     static async onInit() {
 
         game.settings.register("RITA", "assistantName", {
-            name: "Assistant Name",
-            hint: "Changing the assistant name will change the trigger word",
+            name: "RITA.settings.assistantName.name",
+            hint: "RITA.settings.assistantName.hint",
             scope: "client",
             config: true,
             default: "Rita",
@@ -183,8 +183,8 @@ class Rita {
         });
 
         game.settings.register("RITA", "shouldPTT", {
-            name: "Enable PTT",
-            hint: "Hold down a key instead of saying your assistants name. NOTICE: Your game will refresh after updating this.",
+            name: "RITA.settings.shouldPTT.name",
+            hint: "RITA.settings.shouldPTT.hint",
             scope: "client",
             config: true,
             default: true,
@@ -195,8 +195,8 @@ class Rita {
         });
 
         game.settings.register("RITA", "pttKey", {
-            name: "PTT Key",
-            hint: "Keycode referencing a key. NOTICE: Your game will refresh after updating this.",
+            name: "RITA.settings.pttKey.name",
+            hint: "RITA.settings.pttKey.hint",
             scope: "client",
             config: true,
             default: "Insert",
@@ -207,8 +207,8 @@ class Rita {
         });
 
         game.settings.register('RITA', "shouldFindMacro", {
-            name: "Enable automatic macro",
-            hint: "If RITA does not understand a command, try to execute a macro by name",
+            name: "RITA.settings.shouldFindMacro.name",
+            hint: "RITA.settings.shouldFindMacro.hint",
             scope: "client",
             config: true,
             default: true,
@@ -216,7 +216,7 @@ class Rita {
         })
 
         game.settings.register("RITA", "shouldChat", {
-            name: "Enable Chat output",
+            name: "RITA.settings.shouldChat.name",
             scope: "client",
             config: true,
             default: true,
@@ -224,7 +224,7 @@ class Rita {
         });
 
         game.settings.register("RITA", "shouldSpeak", {
-            name: "Enable TTS",
+            name: "RITA.settings.shouldSpeak.name",
             scope: "client",
             config: true,
             default: true,
