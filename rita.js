@@ -231,8 +231,17 @@ class Rita {
             type: Boolean
         });
 
+        game.settings.register("RITA", "respondToChat", {
+            name: "RITA.settings.respondToChat.name",
+            hint: "RITA.settings.respondToChat.hint",
+            scope: "client",
+            config: true,
+            default: true,
+            type: Boolean
+        })
+
         game.settings.register("RITA", "ttsRate", {
-            name: "TTS Rate",
+            name: "RITA.settings.ttsRate.name",
             scope: "client",
             config: true,
             type: Number,
@@ -248,7 +257,7 @@ class Rita {
         });
 
         game.settings.register("RITA", "ttsPitch", {
-            name: "TTS Pitch",
+            name: "RITA.settings.ttsPitch.name",
             scope: "client",
             config: true,
             type: Number,
@@ -264,7 +273,7 @@ class Rita {
         });
 
         game.settings.register("RITA", "ttsVolume", {
-            name: "TTS Volume",
+            name: "RITA.settings.ttsVolume.name",
             scope: "client",
             config: true,
             type: Number,
@@ -282,8 +291,8 @@ class Rita {
         window.speechSynthesis.addEventListener('voiceschanged', function () {
             // console.log(window.speechSynthesis.getVoices());
             game.settings.register("RITA", "ttsVoice", {
-                name: "TTS Voice",
-                hint: "Select an available voice for Text-to-speech",
+                name: "RITA.settings.ttsVoice.name",
+                hint: "RITA.settings.ttsVoice.hint",
                 scope: "client",
                 config: true,
                 choices: window.speechSynthesis.getVoices().map(voice => {
@@ -354,7 +363,7 @@ class Rita {
                             }
                         }
                     } catch (e) {}
-                    RitaTalkback.say(`I don't understand "${phrases[0]}"`)
+                    RitaTalkback.say(game.i18n.format("RITA.responses.notUnderstood", {phrase:phrases[0]}));
                     console.log('no match')
                     console.log(phrases);
                 }
@@ -368,12 +377,25 @@ class Rita {
                 return false;
             });
 
-            ui.notifications.notify(`RITA: ${Rita.assistantName} is listening`);
+            ui.notifications.notify(`RITA: ${game.i18n.format("RITA.notif.listening", {assistantName: Rita.assistantName})}`);
         }
 
 
 
     }
+
+    static onChatMessage(app, content, data){
+        if(game.settings.get("RITA", "respondToChat")){
+            if(content.toLowerCase().indexOf(Rita.assistantName.toLowerCase()) == 0){
+                // Rita was typed first
+                ritaAnnyang.trigger(Rita.fuzzString(content));
+                return false;
+            } else if (Rita.fuzzString(content) == "rita initiate testing protocol 101") {
+                Rita._runTests();
+            }
+        }
+    }
 }
 
 Hooks.once("canvasReady", Rita.onInit);
+Hooks.on("chatMessage", Rita.onChatMessage);
