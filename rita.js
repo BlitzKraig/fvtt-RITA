@@ -70,7 +70,7 @@ class Rita {
 
     static async executeMacro(macroName) {
         let macro = game.macros.find((macro) => {
-            return macro.data.name.toLowerCase().split(' ').join('').replace(/&/g, 'and') == macroName.toLowerCase().split(' ').join('')
+            return Rita.fuzzString(macro.data.name) == Rita.fuzzString(macroName);
         });
         if (macro) {
             macro.execute()
@@ -82,6 +82,58 @@ class Rita {
         return false;
     }
 
+    static async getSpellItemFromActor(actor, spellItemName){
+            // Matched exactly
+            let spellItem = await actor.items.find((item) => item.name.toLowerCase() == spellItemName.toLowerCase());
+
+            // If no match, fuzzy match
+            if(!spellItem){
+                spellItem = await canvas.tokens.controlled[0].actor.items.find((item) => Rita.fuzzString(item.name) == Rita.fuzzString(spellItemName));
+            }
+
+            return spellItem;
+    }
+
+    static async getActorFromString(actorString){
+        let foundActor = await ActorDirectory.collection.find((actorToFind) => actorToFind.data.name.toLowerCase() == actorString.toLowerCase());
+
+        if(!foundActor){
+            foundActor = await ActorDirectory.collection.find((actorToFind) => Rita.fuzzString(actorToFind.data.name, 2) == Rita.fuzzString(actorString, 2));
+        }
+
+        // Strip a/an
+
+        return foundActor;
+    }
+
+    /**
+     * Prepare a string for fuzzy matching. Pass in a level to determine how fuzzy we make it.
+     * @param {string} inputString 
+     * @param {number} level 
+     */
+    static fuzzString(inputString, level = 1) {
+        // TODO: Replace with decent fuzzy matching - consider fuzzyset.js or fuse
+        if (level >= 1) {
+            // Replace ampersand with 'and' to work with voice
+            inputString = inputString.replace(/&/g, 'and');
+            // Remove anything that's not a space, letter, number or Japanese character (provided by BrotherSharper)
+            inputString = inputString.toLowerCase().replace(/[^ a-zA-Z0-9亜-熙ぁ-んァ-ヶ]+/g, '');
+            // Consider handling numbers, though this will be extremely tricky for i18n
+        }
+        if (level >= 2) {
+            // Remove "an " and "a " at the beginning of the string
+            inputString = inputString.toLowerCase().replace(/^(an )+|^(a )+/gi, '');
+        }
+        if (level >= 3) {
+            // Remove vowels
+            inputString = inputString.toLowerCase().replace(/[ ,.]+/g, '').replace(/[aeiou]+/g, '');
+        }
+        return inputString;
+    }
+
+    // static async fuzzyMatchString(inputString, matchArray){
+    //
+    // }
 
     // Dodgy tests to check the chat output, not for general use
     static _runTests(itemName = 'fire bolt', tokenName = 'drow', playlistName = 'battle'){
