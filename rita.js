@@ -75,13 +75,19 @@ class Rita {
      * @param {string} inputString 
      * @param {number} level 
      */
-    static fuzzString(inputString, level = 1) {
+    static fuzzString(inputString, level = 1, stripSpace = true) {
         // TODO: Replace with decent fuzzy matching - consider fuzzyset.js or fuse
+
+        // TODO: Create a fn that performs the actual find/match, and do it in a more performant way (currently runs this fn on the same string for every loop)
         if (level >= 1) {
             // Replace ampersand with 'and' to work with voice
             inputString = inputString.replace(/&/g, 'and');
-            // Remove anything that's not a space, letter, number or Japanese character (provided by BrotherSharper)
-            inputString = inputString.toLowerCase().replace(/[^ a-zA-Z0-9亜-熙ぁ-んァ-ヶ]+/g, '');
+            if(stripSpace){
+            // Remove anything that's not a letter, number or Japanese character (provided by BrotherSharper)
+                inputString = inputString.toLowerCase().replace(/[^a-zA-Z0-9亜-熙ぁ-んァ-ヶ]+/g, '');
+            } else {
+                inputString = inputString.toLowerCase().replace(/[^ a-zA-Z0-9亜-熙ぁ-んァ-ヶ]+/g, '');
+            }
             // Consider handling numbers, though this will be extremely tricky for i18n
         }
         if (level >= 2) {
@@ -429,9 +435,9 @@ class Rita {
         if(game.settings.get("RITA", "respondToChat")){
             if(content.toLowerCase().indexOf(Rita.assistantName.toLowerCase()) == 0){
                 // Rita was typed first
-                ritaAnnyang.trigger(Rita.fuzzString(content));
+                ritaAnnyang.trigger(Rita.fuzzString(content, 1, false));
                 return false;
-            } else if (Rita.fuzzString(content) == "rita initiate testing protocol 101") {
+            } else if (Rita.fuzzString(content, 1, false) == "rita initiate testing protocol 101") {
                 Rita._runTests();
             }
         }
