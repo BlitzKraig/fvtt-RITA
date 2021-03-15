@@ -59,7 +59,7 @@ class RitaTalkback {
             content += message;
             ChatMessage.create({
                 speaker: {
-                    alias: Rita.assistantName
+                    alias: `${Rita.assistantName}🤖`
                 },
                 content: content,
                 type: CONST.CHAT_MESSAGE_TYPES.OTHER
