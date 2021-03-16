@@ -28,6 +28,7 @@ class RitaTalkback {
                 if (window.speechSynthesis) {
                     window.speechSynthesis.cancel();
                     let voicedMessage = message;
+                    voicedMessage = voicedMessage.replace(/\/roll/g, '');
                     voicedMessage = voicedMessage.replace(/\//g, ` ${game.i18n.localize("RITA.responses.talkbackReplacement.or")} `);
                     voicedMessage = voicedMessage.replace(/@mod/g, ` ${game.i18n.localize("RITA.responses.talkbackReplacement.modifier")} `)
                     voicedMessage = voicedMessage.replace(/\+/g, ` ${game.i18n.localize("RITA.responses.talkbackReplacement.plus")} `)

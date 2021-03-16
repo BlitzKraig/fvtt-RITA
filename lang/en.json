@@ -62,6 +62,7 @@
                 "Spawn (a )(an )*actor",
                 "Spon (a )(an )*actor"
             ],
+            "rollDice": "roll *rollFormula",
             "listAllCommands": [
                 "Show (me )(all )(all of your )(your )commands",
                 "List (all )(all of your )(your )commands"
@@ -140,6 +141,25 @@
             },
             "quantity": "You have {quantity} {spell}",
             "stoppingMusic": "Stopping all playlist tracks"
+        },
+        "rollDiceExtras" :{
+            "singular" : [
+                "a",
+                "an"
+            ],
+            "sidedDieComment": "sidedDie is a regular expression, matching 'number sided dice' or 'die', optionally allowing spaces and dashes. You should use the same regular expression-style string when translating, ensuring the number is wrapped in brackets so RITA can capture it. You do not need to translate this string.",
+            "sidedDieComment2": "If there are multiple natural ways to say 'number sided die' in your language, you can add more inside the sidedDie array. If you are not comfortable with regexp, just add as many strings as you need inside the array, and ensure (0-9) exists where the number would lie in the string. You do not need to translate this string.",
+            "sidedDie": [
+                "([0-9]+)[ ]*[-]*sided[ ]*[-]*dice|die"
+            ],
+            "plus": [
+                "plus",
+                "and"
+            ],
+            "rollFail": "Could not roll with formula {rollFormula}",
+            "rolledFormula": "Rolled {rollFormula}",
+            "formulaResult": "Result was {result}",
+            "rolledDiceHeader": "Rolled Dice..."
         },
         "settings": {
             "assistantName": {

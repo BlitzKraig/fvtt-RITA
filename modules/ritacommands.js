@@ -315,6 +315,52 @@ class RitaCommands {
         Rita.listening = false;
     }
 
+    static rollDice(rollFormula){
+        if (Rita.listening) {
+            // Thankfully, numbers appear to be parsed as integers, which is handy for i18n
+
+            // rollFormula = Rita.fuzzString(rollFormula);
+
+            // Replace any dashes with a space
+            rollFormula = rollFormula.replace(/-/g, ' ');
+            
+            // Use the regexp from translations to convert n sided die to dn
+            for (let sidedDie of game.i18n.translations.RITA.rollDiceExtras.sidedDie){
+                rollFormula = rollFormula.replace(new RegExp(sidedDie ,'g'), 'd$1');
+            }
+
+            // Replace 'and' and 'plus' with +
+            for (let plusString of game.i18n.translations.RITA.rollDiceExtras.plus){
+                rollFormula = rollFormula.replace(new RegExp(`${plusString}` ,'g'), '+');
+            }
+
+            // Replace 'an' and 'a' with 1
+            for (let singularString of game.i18n.translations.RITA.rollDiceExtras.singular){
+                rollFormula = rollFormula.replace(new RegExp(`^${singularString} ` ,'g'), '1').replace(new RegExp(` ${singularString} `, 'g'), ' 1');
+            }
+            // Strip spaces
+            rollFormula = rollFormula.replace(/ /g, '');
+
+            try{
+            let roll = new Roll(rollFormula).roll();
+            roll.toMessage({
+                speaker: {alias: Rita.assistantName},
+            });
+
+            RitaTalkback.say(`<p>${game.i18n.format("RITA.rollDiceExtras.rolledFormula", {rollFormula: "[[/roll ${roll._formula}]]"})}</p> <p>${game.i18n.format("RITA.rollDiceExtras.formulaResult", {result: `<b>${roll.total}</b>`})}</p>`,
+            {query: `<h2>${game.i18n.localize("RITA.rollDiceExtras.rolledDiceHeader")}</h2>`});
+        } catch(e){
+            RitaTalkback.say(game.i18n.format("RITA.rollDiceExtras.rollFail", {rollFormula: rollFormula}));
+        }
+            // PARSE:
+            // a to 1
+            // and to plus
+            // plus to +
+            // parse skill + ability names etc.?
+        }
+        Rita.listening = false;
+    }
+
     static async spawnToken(actor) {
         if (Rita.listening) {
             let foundActor = await ActorDirectory.collection.find((actorToFind) => {

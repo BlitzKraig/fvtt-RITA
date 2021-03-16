@@ -84,7 +84,7 @@ class Rita {
             // Replace ampersand with 'and' to work with voice
             inputString = inputString.replace(/&/g, 'and');
             if(stripSpace){
-            // Remove anything that's not a letter, number or Japanese character (provided by BrotherSharper)
+            // Remove anything that's not a letter, number or Japanese character (provided by Brother Sharp)
                 inputString = inputString.toLowerCase().replace(/[^a-zA-Z0-9亜-熙ぁ-んァ-ヶ]+/g, '');
             } else {
                 inputString = inputString.toLowerCase().replace(/[^ a-zA-Z0-9亜-熙ぁ-んァ-ヶ]+/g, '');
